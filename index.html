@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RUN FOR YOUR LIFE 2026</title>
+<title>RUN FOR HEALTHY LIFE 2026</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -237,7 +237,7 @@ button:disabled{
 <div class="banner">
 
 <div class="banner-content">
-<h1>RUN FOR YOUR LIFE 2026</h1>
+<h1>RUN FOR HEALTHY LIFE 2026</h1>
 <p>MOJO HEALTH FEST 2026</p>
 </div>
 
@@ -609,6 +609,7 @@ new Date("2026-07-31");
 
 let earlybirdFull = false;
 let kuota3kFull = false;
+generateBatch();
 
 // ======================================
 // LOAD KUOTA
@@ -696,11 +697,14 @@ console.log(err);
 
 }
 
-loadKuota();
+async function initKuota(){
 
-// ======================================
-// GENERATE BATCH
-// ======================================
+await loadKuota();
+
+
+}
+
+initKuota();
 
 function generateBatch(){
 
