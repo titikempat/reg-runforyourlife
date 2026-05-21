@@ -30,11 +30,11 @@ margin:auto;
 background:#0d2347;
 border-radius:28px;
 overflow:hidden;
-box-shadow:0 20px 60px rgba(0,0,0,0.45);
+box-shadow:0 20px 60px rgba(0,0,0,0.4);
 }
 
 .banner{
-height:340px;
+height:320px;
 background:
 linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
 url('https://images.unsplash.com/photo-1552674605-db6ffd4facb5?q=80&w=1600');
@@ -50,14 +50,14 @@ bottom:40px;
 }
 
 .banner-content h1{
-font-size:58px;
-font-weight:700;
+font-size:54px;
 line-height:1;
+font-weight:700;
 color:#f6c453;
 }
 
 .banner-content p{
-margin-top:12px;
+margin-top:10px;
 font-size:18px;
 }
 
@@ -71,7 +71,6 @@ padding:24px;
 border-radius:22px;
 line-height:2;
 margin-bottom:35px;
-font-size:15px;
 }
 
 .section-title{
@@ -88,13 +87,19 @@ gap:20px;
 margin-bottom:25px;
 }
 
+.grid-form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
 .input-group{
 display:flex;
 flex-direction:column;
 }
 
 .input-group label{
-margin-bottom:10px;
+margin-bottom:8px;
 font-size:14px;
 font-weight:600;
 }
@@ -126,6 +131,10 @@ box-shadow:0 0 0 3px rgba(246,196,83,0.15);
 .input-group input::placeholder,
 .input-group textarea::placeholder{
 color:#94a3b8;
+}
+
+.full-width{
+grid-column:1/3;
 }
 
 .hidden{
@@ -161,7 +170,7 @@ transform:translateY(-2px);
 
 .peserta-card{
 background:#132f5e;
-padding:30px;
+padding:28px;
 border-radius:24px;
 margin-bottom:25px;
 border:1px solid rgba(255,255,255,0.08);
@@ -175,36 +184,26 @@ margin-bottom:25px;
 }
 
 .peserta-title{
-font-size:24px;
+font-size:22px;
 font-weight:700;
 color:#f6c453;
 }
 
 .remove-btn{
-background:#ef4444;
+width:40px;
+height:40px;
 border:none;
-width:42px;
-height:42px;
 border-radius:12px;
-cursor:pointer;
+background:#ef4444;
+color:white;
 font-size:18px;
 font-weight:700;
-color:white;
-}
-
-.grid-form{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:22px;
-}
-
-.full-width{
-grid-column:1/3;
+cursor:pointer;
 }
 
 .total-box{
 background:#132f5e;
-padding:25px;
+padding:24px;
 border-radius:22px;
 margin-top:25px;
 margin-bottom:25px;
@@ -212,12 +211,12 @@ margin-bottom:25px;
 
 .total-box h3{
 font-size:16px;
-margin-bottom:12px;
+margin-bottom:10px;
 color:#f6c453;
 }
 
 .total-price{
-font-size:36px;
+font-size:34px;
 font-weight:700;
 }
 
@@ -267,33 +266,6 @@ margin-bottom:20px;
 color:#7dffb0;
 }
 
-.success-card{
-background:#0b1f3d;
-padding:24px;
-border-radius:18px;
-line-height:2;
-}
-
-.success-btn{
-display:block;
-margin-top:18px;
-padding:16px;
-border-radius:16px;
-text-align:center;
-text-decoration:none;
-font-weight:700;
-}
-
-.wa-btn{
-background:#25D366;
-color:white;
-}
-
-.pay-btn{
-background:#f6c453;
-color:#06152d;
-}
-
 @media(max-width:768px){
 
 body{
@@ -310,7 +282,7 @@ bottom:20px;
 }
 
 .banner-content h1{
-font-size:36px;
+font-size:34px;
 }
 
 .form-section{
@@ -435,7 +407,7 @@ class="add-btn">
 </button>
 
 <p class="helper-text">
-Klik tombol di atas untuk menambahkan peserta baru
+Klik tombol di atas untuk menambahkan peserta
 </p>
 
 </div>
@@ -483,7 +455,7 @@ Rp 0
 <input type="checkbox" required>
 
 <div>
-Saya menyetujui syarat dan ketentuan event RUN FOR YOUR LIFE 2026.
+Saya menyetujui syarat dan ketentuan event RUN FOR HEALTHY LIFE 2026.
 </div>
 
 </div>
@@ -550,9 +522,7 @@ let pesertaCount = 0;
 
 let configData = null;
 
-// ======================================
 // LOAD CONFIG
-// ======================================
 
 async function loadConfig(){
 
@@ -576,9 +546,7 @@ console.log(err);
 
 loadConfig();
 
-// ======================================
 // SHOW HIDE KOMUNITAS
-// ======================================
 
 komunitas.addEventListener(
 "change",
@@ -605,9 +573,7 @@ document
 }
 );
 
-// ======================================
 // FORMAT RUPIAH
-// ======================================
 
 function rupiah(angka){
 
@@ -617,9 +583,7 @@ return new Intl
 
 }
 
-// ======================================
-// GET HARGA
-// ======================================
+// HARGA
 
 function getHarga(
 kategori,
@@ -658,9 +622,7 @@ return 0;
 
 }
 
-// ======================================
 // UPDATE TOTAL
-// ======================================
 
 function updateTotal(){
 
@@ -689,9 +651,7 @@ hargaElement.innerHTML =
 
 }
 
-// ======================================
 // CREATE PESERTA
-// ======================================
 
 function createPeserta(){
 
@@ -730,7 +690,6 @@ class="remove-btn">
 <input
 type="text"
 class="namaLengkap"
-placeholder="Nama lengkap peserta"
 required>
 
 </div>
@@ -743,7 +702,6 @@ required>
 type="text"
 class="nik"
 maxlength="16"
-placeholder="16 digit NIK"
 required>
 
 </div>
@@ -755,7 +713,6 @@ required>
 <input
 type="text"
 class="namaBib"
-placeholder="Nama pada jersey / BIB"
 required>
 
 </div>
@@ -780,7 +737,7 @@ class="jenisKelamin"
 required>
 
 <option value="">
-Pilih Jenis Kelamin
+Pilih
 </option>
 
 <option value="Laki-laki">
@@ -797,12 +754,11 @@ Perempuan
 
 <div class="input-group">
 
-<label>Nomor WhatsApp</label>
+<label>WhatsApp</label>
 
 <input
 type="text"
 class="wa"
-placeholder="08xxxxxxxxxx"
 required>
 
 </div>
@@ -814,19 +770,17 @@ required>
 <input
 type="email"
 class="email"
-placeholder="email@gmail.com"
 required>
 
 </div>
 
 <div class="input-group">
 
-<label>Kota Asal</label>
+<label>Kota</label>
 
 <input
 type="text"
 class="kota"
-placeholder="Kota asal peserta"
 required>
 
 </div>
@@ -840,7 +794,7 @@ class="kategori"
 required>
 
 <option value="">
-Pilih Kategori
+Pilih
 </option>
 
 <option value="3K">
@@ -864,19 +818,12 @@ class="batch"
 required>
 
 <option value="">
-Pilih Batch
+Pilih
 </option>
 
-${
-configData &&
-configData.earlybirdAktif
-? `
 <option value="Earlybird">
 Earlybird
 </option>
-`
-: ""
-}
 
 <option value="Regular">
 Regular
@@ -895,7 +842,7 @@ class="jersey"
 required>
 
 <option value="">
-Pilih Ukuran
+Pilih
 </option>
 
 <option>S</option>
@@ -914,7 +861,7 @@ Pilih Ukuran
 <select class="goldar">
 
 <option value="">
-Pilih Golongan Darah
+Pilih
 </option>
 
 <option>A</option>
@@ -932,8 +879,7 @@ Pilih Golongan Darah
 
 <input
 type="text"
-class="kontakDarurat"
-placeholder="Nomor keluarga / kerabat">
+class="kontakDarurat">
 
 </div>
 
@@ -943,8 +889,7 @@ placeholder="Nomor keluarga / kerabat">
 
 <textarea
 class="riwayat"
-rows="4"
-placeholder="Kosongkan jika tidak ada"></textarea>
+rows="4"></textarea>
 
 </div>
 
@@ -955,9 +900,7 @@ placeholder="Kosongkan jika tidak ada"></textarea>
 pesertaContainer
 .appendChild(div);
 
-// ======================================
-// REMOVE PESERTA
-// ======================================
+// REMOVE
 
 div
 .querySelector(".remove-btn")
@@ -972,9 +915,7 @@ updateTotal();
 }
 );
 
-// ======================================
-// AUTO TANGGAL LAHIR DARI NIK
-// ======================================
+// AUTO TGL DARI NIK
 
 const nikInput =
 div.querySelector(".nik");
@@ -992,19 +933,13 @@ this.value;
 if(nik.length == 16){
 
 let tanggal =
-parseInt(
-nik.substring(6,8)
-);
+parseInt(nik.substring(6,8));
 
 let bulan =
-parseInt(
-nik.substring(8,10)
-);
+parseInt(nik.substring(8,10));
 
 let tahun =
-parseInt(
-nik.substring(10,12)
-);
+parseInt(nik.substring(10,12));
 
 if(tanggal > 40){
 tanggal -= 40;
@@ -1028,9 +963,7 @@ tanggalInput.value =
 }
 );
 
-// ======================================
 // UPDATE TOTAL
-// ======================================
 
 div
 .querySelector(".kategori")
@@ -1048,9 +981,7 @@ updateTotal
 
 }
 
-// ======================================
 // TAMBAH PESERTA
-// ======================================
 
 tambahPesertaBtn
 .addEventListener(
@@ -1058,9 +989,7 @@ tambahPesertaBtn
 createPeserta
 );
 
-// ======================================
 // SUBMIT
-// ======================================
 
 document
 .getElementById("registerForm")
@@ -1087,10 +1016,6 @@ document
 .style.display = "block";
 
 submitBtn.disabled = true;
-
-// ======================================
-// AMBIL DATA PESERTA
-// ======================================
 
 const peserta = [];
 
@@ -1155,10 +1080,6 @@ document.getElementById("metodeBayar").value
 
 });
 
-// ======================================
-// POST DATA
-// ======================================
-
 try{
 
 const response =
@@ -1185,29 +1106,17 @@ peserta : peserta
 const res =
 await response.json();
 
-// ======================================
-// STOP LOADING
-// ======================================
-
 document
 .getElementById("loading")
 .style.display = "none";
 
 submitBtn.disabled = false;
 
-// ======================================
-// SUCCESS
-// ======================================
-
 if(res.status === "success"){
 
 document
 .getElementById("successBox")
 .style.display = "block";
-
-// ======================================
-// FORMAT NOMOR WA
-// ======================================
 
 let nomorWA =
 peserta[0].wa.trim();
@@ -1216,35 +1125,22 @@ nomorWA =
 nomorWA.replace(/\D/g,'');
 
 if(nomorWA.startsWith("0")){
-
 nomorWA =
 "62" + nomorWA.substring(1);
-
 }
-
-// ======================================
-// FORMAT LIST BIB
-// ======================================
-
-const listBib =
-res.bib.join("\n");
-
-// ======================================
-// PESAN WHATSAPP
-// ======================================
 
 const pesanWA =
 encodeURIComponent(
 
 `✅ REGISTRASI BERHASIL
 
-RUN FOR YOUR LIFE 2026
+RUN FOR HEALTHY LIFE 2026
 
 Register ID :
 ${res.registerId}
 
 BIB PESERTA :
-${listBib}
+${res.bib.join("\n")}
 
 Jumlah Peserta :
 ${res.jumlahPeserta}
@@ -1264,111 +1160,48 @@ Terima kasih 🙏`
 
 );
 
-// ======================================
-// LINK WA
-// ======================================
-
 const waLink =
 `https://wa.me/${nomorWA}?text=${pesanWA}`;
-
-// ======================================
-// LINK KONFIRMASI
-// ======================================
-
-const konfirmasiLink =
-"https://forms.gle/DgjCQF4w8h9rYBLq7";
-
-// ======================================
-// TAMPILKAN SUCCESS
-// ======================================
 
 document
 .getElementById("successText")
 .innerHTML = `
 
-<div style="
-background:#0b1f3d;
-padding:24px;
-border-radius:22px;
-line-height:2;
-">
-
-✅ <b>REGISTRASI BERHASIL</b><br><br>
+<div class="success-card">
 
 <b>Register ID :</b><br>
 ${res.registerId}<br><br>
 
-<b>BIB PESERTA :</b><br>
+<b>BIB Peserta :</b><br>
 ${res.bib.join("<br>")}<br><br>
 
 <b>Jumlah Peserta :</b><br>
 ${res.jumlahPeserta}<br><br>
 
 <b>Total Pembayaran :</b><br>
-Rp ${rupiah(res.harga)}<br><br>
-
-<hr style="
-border:none;
-border-top:1px solid rgba(255,255,255,0.12);
-margin:18px 0;
-">
-
-💳 <b>INFORMASI PEMBAYARAN</b><br><br>
-
-Bank Jatim<br>
-0162123456<br><br>
-
-Silakan lakukan pembayaran
-dan simpan bukti transfer.
+Rp ${rupiah(res.harga)}
 
 </div>
-
-<div style="margin-top:20px;">
 
 <a
 href="${waLink}"
 target="_blank"
-style="
-display:block;
-text-decoration:none;
-background:#25D366;
-color:white;
-padding:16px;
-border-radius:16px;
-text-align:center;
-font-weight:700;
-margin-bottom:12px;
-">
+class="success-btn wa-btn">
 
 📩 Kirim Detail Registrasi ke WhatsApp Saya
 
 </a>
 
 <a
-href="${konfirmasiLink}"
+href="https://forms.gle/DgjCQF4w8h9rYBLq7"
 target="_blank"
-style="
-display:block;
-text-decoration:none;
-background:#f6c453;
-color:#06152d;
-padding:16px;
-border-radius:16px;
-text-align:center;
-font-weight:700;
-">
+class="success-btn pay-btn">
 
 📤 Konfirmasi Pembayaran
 
 </a>
 
-</div>
-
 `;
-
-// ======================================
-// RESET FORM
-// ======================================
 
 document
 .getElementById("registerForm")
@@ -1383,10 +1216,6 @@ komunitasBox
 .classList
 .add("hidden");
 
-// ======================================
-// SCROLL
-// ======================================
-
 window.scrollTo({
 
 top :
@@ -1399,12 +1228,7 @@ behavior :
 
 }else{
 
-alert(
-"SERVER ERROR : " +
-res.message
-);
-
-console.log(res);
+alert(res.message);
 
 }
 
@@ -1416,12 +1240,7 @@ document
 
 submitBtn.disabled = false;
 
-alert(
-"ERROR : " +
-err.message
-);
-
-console.log(err);
+alert(err.message);
 
 }
 
