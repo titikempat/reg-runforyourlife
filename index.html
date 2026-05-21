@@ -226,6 +226,238 @@ button:disabled{
 
 }
 
+/* =========================================
+RESPONSIVE EXTRA
+========================================= */
+
+/* Desktop besar */
+@media (min-width:1400px){
+
+.container{
+    max-width:1200px;
+}
+
+.banner{
+    height:420px;
+}
+
+.banner-content h1{
+    font-size:64px;
+}
+
+.banner-content p{
+    font-size:22px;
+}
+
+}
+
+/* Laptop */
+@media (max-width:1024px){
+
+.container{
+    max-width:95%;
+}
+
+.banner{
+    height:300px;
+}
+
+.banner-content{
+    left:25px;
+    bottom:25px;
+}
+
+.banner-content h1{
+    font-size:44px;
+}
+
+.form-section{
+    padding:25px;
+}
+
+}
+
+/* Tablet */
+@media (max-width:768px){
+
+body{
+    padding:12px;
+}
+
+.container{
+    border-radius:18px;
+}
+
+.grid{
+    grid-template-columns:1fr;
+    gap:16px;
+}
+
+.full{
+    grid-column:auto;
+}
+
+.banner{
+    height:240px;
+}
+
+.banner-content{
+    left:20px;
+    bottom:20px;
+}
+
+.banner-content h1{
+    font-size:34px;
+    line-height:1.1;
+}
+
+.banner-content p{
+    font-size:15px;
+}
+
+.form-section{
+    padding:20px;
+}
+
+.section-title{
+    font-size:22px;
+}
+
+.info-box,
+.quota-box{
+    padding:18px;
+    font-size:14px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+    font-size:14px;
+    padding:13px;
+}
+
+button{
+    font-size:16px;
+    padding:15px;
+}
+
+}
+
+/* HP */
+@media (max-width:480px){
+
+body{
+    padding:8px;
+}
+
+.container{
+    border-radius:14px;
+}
+
+.banner{
+    height:210px;
+}
+
+.banner-content{
+    left:15px;
+    bottom:15px;
+}
+
+.banner-content h1{
+    font-size:26px;
+}
+
+.banner-content p{
+    font-size:13px;
+}
+
+.form-section{
+    padding:15px;
+}
+
+.section-title{
+    font-size:19px;
+    margin-bottom:18px;
+}
+
+.info-box,
+.quota-box{
+    padding:15px;
+    border-radius:14px;
+    font-size:13px;
+    line-height:1.7;
+}
+
+.input-group label{
+    font-size:14px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+    padding:12px;
+    font-size:13px;
+    border-radius:12px;
+}
+
+button{
+    padding:14px;
+    font-size:15px;
+    border-radius:12px;
+}
+
+.badge{
+    margin-top:5px;
+    display:inline-block;
+}
+
+.success{
+    padding:18px;
+}
+
+}
+
+/* HP sangat kecil */
+@media (max-width:360px){
+
+.banner-content h1{
+    font-size:22px;
+}
+
+.banner-content p{
+    font-size:12px;
+}
+
+.section-title{
+    font-size:17px;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea{
+    font-size:12px;
+}
+
+button{
+    font-size:14px;
+}
+
+}
+
+/* INFO FLEX */
+.info-flex{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+@media (max-width:768px){
+
+.info-flex{
+    grid-template-columns:1fr;
+}
+
+}
 </style>
 
 </head>
@@ -245,7 +477,9 @@ button:disabled{
 
 <div class="form-section">
 
-<div class="info-box">
+<div class="info-box info-flex">
+
+<div>
 
 📍 Taman Bahari Mojopahit – Kota Mojokerto<br>
 📅 27 September 2026<br><br>
@@ -254,7 +488,11 @@ button:disabled{
 🔥 Warm Up : 05.30 WIB<br><br>
 
 🚩 Flag Off 5K : 06.00 WIB<br>
-🚩 Flag Off 3K : 06.15 WIB<br><br>
+🚩 Flag Off 3K : 06.15 WIB
+
+</div>
+
+<div>
 
 🏃 Kategori : 3K Fun Run & 5K Race<br><br>
 
@@ -262,10 +500,12 @@ button:disabled{
 • Jersey Exclusive<br>
 • BIB Number<br>
 • Finisher Medal<br>
-• Refreshment<br>
+• Refreshment<br><br>
 
 🎟 Limited Slot Available<br>
 📲 Daftar Sekarang & Jadilah Bagian Dari #RunForHealthyLife2026
+
+</div>
 
 </div>
 
