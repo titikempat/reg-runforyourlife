@@ -543,13 +543,20 @@ document.getElementById("komunitasBox");
 const hargaElement =
 document.getElementById("harga");
 
+const submitBtn =
+document.getElementById("submitBtn");
+
 let pesertaCount = 0;
 
 let configData = null;
 
+// ======================================
 // LOAD CONFIG
+// ======================================
 
 async function loadConfig(){
+
+try{
 
 const res =
 await fetch(
@@ -559,11 +566,19 @@ WEBAPP_URL + "?action=config"
 configData =
 await res.json();
 
+}catch(err){
+
+console.log(err);
+
+}
+
 }
 
 loadConfig();
 
-// KOMUNITAS
+// ======================================
+// SHOW HIDE KOMUNITAS
+// ======================================
 
 komunitas.addEventListener(
 "change",
@@ -581,12 +596,18 @@ komunitasBox
 .classList
 .add("hidden");
 
+document
+.getElementById("namaKomunitas")
+.value = "";
+
 }
 
 }
 );
 
+// ======================================
 // FORMAT RUPIAH
+// ======================================
 
 function rupiah(angka){
 
@@ -596,7 +617,9 @@ return new Intl
 
 }
 
-// HARGA
+// ======================================
+// GET HARGA
+// ======================================
 
 function getHarga(
 kategori,
@@ -635,24 +658,27 @@ return 0;
 
 }
 
+// ======================================
 // UPDATE TOTAL
+// ======================================
 
 function updateTotal(){
 
 let total = 0;
 
 document
-.querySelectorAll(".kategori")
-.forEach((kat,index)=>{
+.querySelectorAll(".peserta-card")
+.forEach(card => {
+
+const kategori =
+card.querySelector(".kategori").value;
 
 const batch =
-document
-.querySelectorAll(".batch")[index]
-.value;
+card.querySelector(".batch").value;
 
 total +=
 getHarga(
-kat.value,
+kategori,
 batch
 );
 
@@ -663,7 +689,9 @@ hargaElement.innerHTML =
 
 }
 
+// ======================================
 // CREATE PESERTA
+// ======================================
 
 function createPeserta(){
 
@@ -696,39 +724,51 @@ class="remove-btn">
 <div class="grid-form">
 
 <div class="input-group">
+
 <label>Nama Lengkap</label>
+
 <input
 type="text"
 class="namaLengkap"
 placeholder="Nama lengkap peserta"
 required>
+
 </div>
 
 <div class="input-group">
+
 <label>NIK</label>
+
 <input
 type="text"
 class="nik"
 maxlength="16"
 placeholder="16 digit NIK"
 required>
+
 </div>
 
 <div class="input-group">
+
 <label>Nama BIB</label>
+
 <input
 type="text"
 class="namaBib"
 placeholder="Nama pada jersey / BIB"
 required>
+
 </div>
 
 <div class="input-group">
+
 <label>Tanggal Lahir</label>
+
 <input
 type="date"
 class="tanggalLahir"
 required>
+
 </div>
 
 <div class="input-group">
@@ -756,35 +796,44 @@ Perempuan
 </div>
 
 <div class="input-group">
+
 <label>Nomor WhatsApp</label>
+
 <input
 type="text"
 class="wa"
 placeholder="08xxxxxxxxxx"
 required>
+
 </div>
 
 <div class="input-group">
+
 <label>Email</label>
+
 <input
 type="email"
 class="email"
 placeholder="email@gmail.com"
 required>
+
 </div>
 
 <div class="input-group">
+
 <label>Kota Asal</label>
+
 <input
 type="text"
 class="kota"
 placeholder="Kota asal peserta"
 required>
+
 </div>
 
 <div class="input-group">
 
-<label>Kategori Lari</label>
+<label>Kategori</label>
 
 <select
 class="kategori"
@@ -906,7 +955,9 @@ placeholder="Kosongkan jika tidak ada"></textarea>
 pesertaContainer
 .appendChild(div);
 
+// ======================================
 // REMOVE PESERTA
+// ======================================
 
 div
 .querySelector(".remove-btn")
@@ -921,7 +972,9 @@ updateTotal();
 }
 );
 
-// AUTO TANGGAL DARI NIK
+// ======================================
+// AUTO TANGGAL LAHIR DARI NIK
+// ======================================
 
 const nikInput =
 div.querySelector(".nik");
@@ -975,7 +1028,9 @@ tanggalInput.value =
 }
 );
 
+// ======================================
 // UPDATE TOTAL
+// ======================================
 
 div
 .querySelector(".kategori")
@@ -993,7 +1048,9 @@ updateTotal
 
 }
 
+// ======================================
 // TAMBAH PESERTA
+// ======================================
 
 tambahPesertaBtn
 .addEventListener(
@@ -1001,7 +1058,9 @@ tambahPesertaBtn
 createPeserta
 );
 
+// ======================================
 // SUBMIT
+// ======================================
 
 document
 .getElementById("registerForm")
@@ -1027,9 +1086,11 @@ document
 .getElementById("loading")
 .style.display = "block";
 
-document
-.getElementById("submitBtn")
-.disabled = true;
+submitBtn.disabled = true;
+
+// ======================================
+// AMBIL DATA PESERTA
+// ======================================
 
 const peserta = [];
 
@@ -1094,6 +1155,10 @@ document.getElementById("metodeBayar").value
 
 });
 
+// ======================================
+// POST DATA
+// ======================================
+
 try{
 
 const response =
@@ -1120,50 +1185,207 @@ peserta : peserta
 const res =
 await response.json();
 
+// ======================================
+// STOP LOADING
+// ======================================
+
 document
 .getElementById("loading")
 .style.display = "none";
 
-document
-.getElementById("submitBtn")
-.disabled = false;
+submitBtn.disabled = false;
 
-if(res.status == "success"){
+// ======================================
+// SUCCESS
+// ======================================
+
+if(res.status === "success"){
 
 document
 .getElementById("successBox")
 .style.display = "block";
 
+// ======================================
+// FORMAT NOMOR WA
+// ======================================
+
+let nomorWA =
+peserta[0].wa.trim();
+
+nomorWA =
+nomorWA.replace(/\D/g,'');
+
+if(nomorWA.startsWith("0")){
+
+nomorWA =
+"62" + nomorWA.substring(1);
+
+}
+
+// ======================================
+// FORMAT LIST BIB
+// ======================================
+
+const listBib =
+res.bib.join("\n");
+
+// ======================================
+// PESAN WHATSAPP
+// ======================================
+
+const pesanWA =
+encodeURIComponent(
+
+`✅ REGISTRASI BERHASIL
+
+RUN FOR YOUR LIFE 2026
+
+Register ID :
+${res.registerId}
+
+BIB PESERTA :
+${listBib}
+
+Jumlah Peserta :
+${res.jumlahPeserta}
+
+Total Pembayaran :
+Rp ${rupiah(res.harga)}
+
+💳 PEMBAYARAN
+Bank Jatim
+0162123456
+
+Silakan lakukan pembayaran lalu upload bukti transfer melalui link dibawah.
+
+https://forms.gle/DgjCQF4w8h9rYBLq7
+
+Terima kasih 🙏`
+
+);
+
+// ======================================
+// LINK WA
+// ======================================
+
+const waLink =
+`https://wa.me/${nomorWA}?text=${pesanWA}`;
+
+// ======================================
+// LINK KONFIRMASI
+// ======================================
+
+const konfirmasiLink =
+"https://forms.gle/DgjCQF4w8h9rYBLq7";
+
+// ======================================
+// TAMPILKAN SUCCESS
+// ======================================
+
 document
 .getElementById("successText")
 .innerHTML = `
 
-<div class="success-card">
+<div style="
+background:#0b1f3d;
+padding:24px;
+border-radius:22px;
+line-height:2;
+">
+
+✅ <b>REGISTRASI BERHASIL</b><br><br>
 
 <b>Register ID :</b><br>
 ${res.registerId}<br><br>
 
-<b>BIB Peserta :</b><br>
+<b>BIB PESERTA :</b><br>
 ${res.bib.join("<br>")}<br><br>
 
 <b>Jumlah Peserta :</b><br>
 ${res.jumlahPeserta}<br><br>
 
 <b>Total Pembayaran :</b><br>
-Rp ${rupiah(res.harga)}
+Rp ${rupiah(res.harga)}<br><br>
+
+<hr style="
+border:none;
+border-top:1px solid rgba(255,255,255,0.12);
+margin:18px 0;
+">
+
+💳 <b>INFORMASI PEMBAYARAN</b><br><br>
+
+Bank Jatim<br>
+0162123456<br><br>
+
+Silakan lakukan pembayaran
+dan simpan bukti transfer.
 
 </div>
 
+<div style="margin-top:20px;">
+
 <a
-href="https://forms.gle/DgjCQF4w8h9rYBLq7"
+href="${waLink}"
 target="_blank"
-class="success-btn pay-btn">
+style="
+display:block;
+text-decoration:none;
+background:#25D366;
+color:white;
+padding:16px;
+border-radius:16px;
+text-align:center;
+font-weight:700;
+margin-bottom:12px;
+">
+
+📩 Kirim Detail Registrasi ke WhatsApp Saya
+
+</a>
+
+<a
+href="${konfirmasiLink}"
+target="_blank"
+style="
+display:block;
+text-decoration:none;
+background:#f6c453;
+color:#06152d;
+padding:16px;
+border-radius:16px;
+text-align:center;
+font-weight:700;
+">
 
 📤 Konfirmasi Pembayaran
 
 </a>
 
+</div>
+
 `;
+
+// ======================================
+// RESET FORM
+// ======================================
+
+document
+.getElementById("registerForm")
+.reset();
+
+pesertaContainer.innerHTML = "";
+
+hargaElement.innerHTML =
+"Rp 0";
+
+komunitasBox
+.classList
+.add("hidden");
+
+// ======================================
+// SCROLL
+// ======================================
 
 window.scrollTo({
 
@@ -1177,7 +1399,12 @@ behavior :
 
 }else{
 
-alert(res.message);
+alert(
+"SERVER ERROR : " +
+res.message
+);
+
+console.log(res);
 
 }
 
@@ -1187,11 +1414,14 @@ document
 .getElementById("loading")
 .style.display = "none";
 
-document
-.getElementById("submitBtn")
-.disabled = false;
+submitBtn.disabled = false;
 
-alert(err.message);
+alert(
+"ERROR : " +
+err.message
+);
+
+console.log(err);
 
 }
 
