@@ -458,6 +458,199 @@ button{
 }
 
 }
+
+/* =========================================
+COUNTDOWN
+========================================= */
+
+.countdown-box{
+    background:#132f5e;
+    padding:22px;
+    border-radius:18px;
+    margin-bottom:25px;
+    text-align:center;
+}
+
+.countdown-title{
+    color:#f6c453;
+    font-weight:700;
+    margin-bottom:18px;
+    font-size:18px;
+    letter-spacing:1px;
+}
+
+.countdown-wrapper{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.countdown-item{
+    background:#0d2347;
+    min-width:90px;
+    padding:16px 10px;
+    border-radius:16px;
+    box-shadow:0 0 15px rgba(0,0,0,0.25);
+}
+
+.countdown-item span{
+    display:block;
+    font-size:34px;
+    font-weight:700;
+    color:#f6c453;
+    line-height:1;
+}
+
+.countdown-item small{
+    font-size:13px;
+    color:#ccc;
+}
+
+.countdown-ended{
+    background:#6b1d1d;
+    color:#ffb1b1;
+    padding:16px;
+    border-radius:14px;
+    font-weight:700;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.countdown-item{
+    min-width:70px;
+    padding:14px 8px;
+}
+
+.countdown-item span{
+    font-size:26px;
+}
+
+.countdown-title{
+    font-size:15px;
+}
+
+}
+
+/* =========================================
+TERMS MODAL
+========================================= */
+
+.agreement-label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.terms-link{
+    color:#f6c453;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.terms-link:hover{
+    opacity:0.8;
+}
+
+.terms-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    padding:20px;
+}
+
+.terms-content{
+    width:100%;
+    max-width:650px;
+    background:#0d2347;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 0 40px rgba(0,0,0,0.5);
+    animation:modalFade 0.3s ease;
+}
+
+.terms-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px;
+    background:#132f5e;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.terms-header h2{
+    color:#f6c453;
+    font-size:22px;
+}
+
+.terms-header button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:12px;
+    background:#f6c453;
+    color:#06152d;
+    font-size:18px;
+    cursor:pointer;
+    padding:0;
+}
+
+.terms-body{
+    padding:25px;
+    max-height:70vh;
+    overflow-y:auto;
+    line-height:1.9;
+    color:#ddd;
+}
+
+.terms-body p{
+    margin-bottom:14px;
+}
+
+@keyframes modalFade{
+
+from{
+    opacity:0;
+    transform:translateY(20px);
+}
+
+to{
+    opacity:1;
+    transform:translateY(0);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.terms-content{
+    border-radius:18px;
+}
+
+.terms-header{
+    padding:18px;
+}
+
+.terms-header h2{
+    font-size:18px;
+}
+
+.terms-body{
+    padding:18px;
+    font-size:14px;
+}
+
+}
 </style>
 
 </head>
@@ -509,6 +702,49 @@ button{
 
 </div>
 
+
+<!-- COUNTDOWN -->
+
+<div class="countdown-box">
+
+<div class="countdown-title">
+⏳ PENDAFTARAN DITUTUP DALAM
+</div>
+
+<div class="countdown-wrapper">
+
+<div class="countdown-item">
+<span id="days">00</span>
+<small>Hari</small>
+</div>
+
+<div class="countdown-item">
+<span id="hours">00</span>
+<small>Jam</small>
+</div>
+
+<div class="countdown-item">
+<span id="minutes">00</span>
+<small>Menit</small>
+</div>
+
+<div class="countdown-item">
+<span id="seconds">00</span>
+<small>Detik</small>
+</div>
+
+</div>
+
+<div
+id="countdownEnded"
+class="countdown-ended hidden"
+>
+
+🚫 PENDAFTARAN SUDAH DITUTUP
+
+</div>
+
+</div>
 <!-- QUOTA INFO -->
 
 <div class="quota-box">
@@ -521,6 +757,11 @@ button{
 <div class="quota-item">
 🏃 Kuota 3K :
 <span id="kuota3kInfo">Loading...</span>
+</div>
+
+<div class="quota-item">
+🏃 Kuota 5K :
+<span id="kuota5kInfo">Loading...</span>
 </div>
 
 </div>
@@ -766,15 +1007,20 @@ name="riwayat"></textarea>
 <!-- AGREEMENT -->
 <div class="input-group full">
 
-<label>
+<label class="agreement-label">
 
 <input type="checkbox" required>
 
-Saya menyetujui syarat dan ketentuan event
+Saya menyetujui
+
+<span id="openTerms" class="terms-link">
+Syarat & Ketentuan Event
+</span>
 
 </label>
 
 </div>
+
 
 <!-- BUTTON -->
 <div class="full">
@@ -794,6 +1040,66 @@ DAFTAR SEKARANG
 ⏳ Sedang mengirim data...
 </div>
 
+<!-- TERMS MODAL -->
+
+<div
+id="termsModal"
+class="terms-modal hidden"
+>
+
+<div class="terms-content">
+
+<div class="terms-header">
+
+<h2>
+SYARAT & KETENTUAN
+</h2>
+
+<button id="closeTerms">
+✕
+</button>
+
+</div>
+
+<div class="terms-body">
+
+<p>
+1. Tiket yang sudah dibeli tidak dapat direfund.
+</p>
+
+<p>
+2. Peserta wajib menjaga kesehatan selama event berlangsung.
+</p>
+
+<p>
+3. Jersey sesuai ukuran yang dipilih saat registrasi.
+</p>
+
+<p>
+4. Panitia tidak bertanggung jawab atas kehilangan barang pribadi.
+</p>
+
+<p>
+5. Peserta wajib mengikuti aturan panitia dan marshal.
+</p>
+
+<p>
+6. Data registrasi wajib diisi dengan benar.
+</p>
+
+<p>
+7. Race pack hanya diberikan kepada peserta resmi.
+</p>
+
+<p>
+8. Panitia dapat melakukan perubahan teknis sewaktu-waktu.
+</p>
+
+</div>
+
+</div>
+
+</div>
 <!-- SUCCESS -->
 <div class="success" id="successBox">
 
@@ -846,6 +1152,9 @@ document.getElementById("earlybirdInfo");
 const kuota3kInfo =
 document.getElementById("kuota3kInfo");
 
+const kuota5kInfo =
+document.getElementById("kuota5kInfo");
+
 // ======================================
 // URL WEB APP
 // ======================================
@@ -895,8 +1204,6 @@ res.earlybird.full;
 
 earlybirdInfo.innerHTML = `
 
-${res.earlybird.total}/${res.earlybird.max}
-
 <span class="
 badge
 ${res.earlybird.full
@@ -921,8 +1228,6 @@ res.kategori3K.full;
 
 kuota3kInfo.innerHTML = `
 
-${res.kategori3K.total}/${res.kategori3K.max}
-
 <span class="
 badge
 ${res.kategori3K.full
@@ -931,6 +1236,27 @@ ${res.kategori3K.full
 ">
 
 ${res.kategori3K.full
+? "FULL"
+: "TERSEDIA"}
+
+</span>
+
+`;
+
+// ==================================
+// 5K
+// ==================================
+
+kuota5kInfo.innerHTML = `
+
+<span class="
+badge
+${res.kategori5K.full
+? "badge-close"
+: "badge-open"}
+">
+
+${res.kategori5K.full
 ? "FULL"
 : "TERSEDIA"}
 
@@ -1009,6 +1335,99 @@ regular.textContent = "Regular";
 batch.appendChild(regular);
 
 }
+
+// ======================================
+// COUNTDOWN PENDAFTARAN
+// ======================================
+
+const countdownDate =
+new Date("2026-09-25T23:59:59").getTime();
+
+const countdownInterval =
+setInterval(function(){
+
+const now =
+new Date().getTime();
+
+const distance =
+countdownDate - now;
+
+// ==================================
+// SUDAH DITUTUP
+// ==================================
+
+if(distance < 0){
+
+clearInterval(countdownInterval);
+
+document
+.getElementById("countdownEnded")
+.classList.remove("hidden");
+
+document
+.querySelector(".countdown-wrapper")
+.style.display = "none";
+
+submitBtn.disabled = true;
+
+submitBtn.innerText =
+"PENDAFTARAN DITUTUP";
+
+return;
+
+}
+
+// ==================================
+// HITUNG WAKTU
+// ==================================
+
+const days =
+Math.floor(
+distance / (1000 * 60 * 60 * 24)
+);
+
+const hours =
+Math.floor(
+(distance % (1000 * 60 * 60 * 24))
+/
+(1000 * 60 * 60)
+);
+
+const minutes =
+Math.floor(
+(distance % (1000 * 60 * 60))
+/
+(1000 * 60)
+);
+
+const seconds =
+Math.floor(
+(distance % (1000 * 60))
+/
+1000
+);
+
+// ==================================
+// TAMPILKAN
+// ==================================
+
+document.getElementById("days")
+.innerText =
+String(days).padStart(2,"0");
+
+document.getElementById("hours")
+.innerText =
+String(hours).padStart(2,"0");
+
+document.getElementById("minutes")
+.innerText =
+String(minutes).padStart(2,"0");
+
+document.getElementById("seconds")
+.innerText =
+String(seconds).padStart(2,"0");
+
+},1000);
 
 // ======================================
 // AUTO TANGGAL LAHIR DARI NIK
@@ -1483,6 +1902,46 @@ console.log(err);
 
 });
 
+// ======================================
+// TERMS MODAL
+// ======================================
+
+const termsModal =
+document.getElementById("termsModal");
+
+const openTerms =
+document.getElementById("openTerms");
+
+const closeTerms =
+document.getElementById("closeTerms");
+
+// OPEN
+
+openTerms.addEventListener("click", function(){
+
+termsModal.classList.remove("hidden");
+
+});
+
+// CLOSE BUTTON
+
+closeTerms.addEventListener("click", function(){
+
+termsModal.classList.add("hidden");
+
+});
+
+// CLOSE OUTSIDE
+
+termsModal.addEventListener("click", function(e){
+
+if(e.target === termsModal){
+
+termsModal.classList.add("hidden");
+
+}
+
+});
 </script>
 
 </body>
